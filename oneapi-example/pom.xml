@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.macquarie.bfs</groupId>
+  <artifactId>oneapi-example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>OneAPI Example API</name>
+  <description>Example API created as per ONE API standards</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-test</artifactId>
+  		<version>1.3.5.RELEASE</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-web</artifactId>
+  		<version>1.3.5.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-jersey</artifactId>
+  		<version>1.3.5.RELEASE</version>
+  	</dependency>
+  </dependencies>
+  <url>https://confluence.internal.macquarie.com/x/QJo0FQ</url>
+</project>

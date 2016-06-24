@@ -16,7 +16,7 @@ import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.macquarie.bfs.oneapi.example.entity.model.Response;
 import com.macquarie.bfs.oneapi.example.service.AccountService;
 
-@Path("/")
+@Path("/accounts")
 @Component
 public class AccountResource {
 	
@@ -26,7 +26,7 @@ public class AccountResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-	@Path("/accounts")
+	@Path("/")
 	public Response getAccounts(@DefaultValue("0") @QueryParam("offset") int offset, @DefaultValue("10") @QueryParam("limit") int limit) {
 		return accountService.getAccounts(offset, limit);
 	}
@@ -34,7 +34,7 @@ public class AccountResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-	@Path("/accounts/{id}")
+	@Path("/{id}")
 	public Response getAccount(@PathParam("id") String id) {
 		return accountService.getAccount(id);
 	}

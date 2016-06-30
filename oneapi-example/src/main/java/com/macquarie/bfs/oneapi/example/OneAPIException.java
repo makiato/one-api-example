@@ -10,10 +10,12 @@ public class OneAPIException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
 	public OneAPIException(ErrorObject error) {
+		super(error.getCode() + " " + error.getMessage());
 		setError(error);
 	}
 	
 	public OneAPIException(ErrorObject error, int httpCode) {
+		super(error.getCode() + " " + error.getMessage());
 		setError(error);
 		setHttpCode(httpCode);
 	}

@@ -2,6 +2,7 @@ package com.macquarie.bfs.oneapi.example.repository;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,21 @@ import com.macquarie.bfs.oneapi.example.entity.model.Entity;
 public class AccountRepository {
 	SecureRandom random;
 	List<Entity> accounts;
+	List<Entity> loanAccounts = new ArrayList<Entity>();
+	List<Entity> txnAccounts = new ArrayList<Entity>();
+	List<String> txnAccountTypes = Arrays.asList("Macquarie Platinum Transaction Account","Macquarie Transaction Account","Macquarie Savings Account","Clearing Account","Woolworths Premium Transaction Account");
+	List<String> loanAccountTypes = Arrays.asList("Basic Home Loan","Offset Home Loan","Line of Credit Home Loan","SMSF Property Loan","Reverse Mortgage");
+	
+	int size = 0;
+	
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	static Map<String, Entity> accountsRep = null;
 	
 	public AccountRepository() {
@@ -25,6 +41,8 @@ public class AccountRepository {
 		while(i < 100) {
 			entity = generateRandomAccount();
 			accountsRep.put(entity.getId(), entity);
+			if(entity.getParentEntityTypes().contains("Loan Account")) loanAccounts.add(entity);
+			if(entity.getParentEntityTypes().contains("Transaction Account")) txnAccounts.add(entity);
 			i++;
 		}
 		accounts = new ArrayList<Entity>(accountsRep.values());
@@ -42,14 +60,23 @@ public class AccountRepository {
 			}
 			return accountsRep.get(id);
 		} catch(Exception x) {
-			ErrorObject error = new ErrorObject("U001", "This hapenned" + x.getClass().getName());
+			ErrorObject error = new ErrorObject("U001", "This happenned > " + x.getClass().getName() + " - " + x.getMessage());
 			throw new OneAPIException(error, 500);
 		}
 	}
 
-	public List<Entity> getAccountsPaginated(int offset, int limit) throws OneAPIException {
+	public List<Entity> getAccountsPaginated(int offset, int limit, String type) throws OneAPIException {
 		try {
-			return accounts.subList(offset, offset+limit);
+			if(type.equals("Loan Account")) {
+				setSize(loanAccounts.size());
+				return loanAccounts.subList(offset, offset+limit);
+			} else if(type.equals("Transaction Account")) {
+				setSize(txnAccounts.size());
+				return txnAccounts.subList(offset, offset+limit);
+			} else {
+				setSize(accounts.size());
+				return accounts.subList(offset, offset+limit);
+			}
 		} catch(IndexOutOfBoundsException x) {
 			ErrorObject error = new ErrorObject("F103", "Offset and Limit combination is out of range");
 			throw new OneAPIException(error, 200);
@@ -65,11 +92,14 @@ public class AccountRepository {
 		int r = random.nextInt(2) + 1;
 		switch (r) {
 			case 1: 
-				account = new TransactionAccount(UUID.randomUUID().toString(), generateRandomStatus());
+				TransactionAccount transaction = new TransactionAccount(UUID.randomUUID().toString(), generateRandomStatus(), generateRandomTransactionAccount());
+				transaction.setSelf("/one-api/v1" + "/accounts/" + transaction.getId());
+				account = transaction;
 				break;
 			case 2:
-				LoanAccount loan = new LoanAccount(UUID.randomUUID().toString(), generateRandomStatus());
-				loan.setLoanType("Basic Home Loan");
+				LoanAccount loan = new LoanAccount(UUID.randomUUID().toString(), generateRandomStatus(), generateRandomLoanAccount());
+				loan.setLoanDuration("P" + (random.nextInt(20) + 10) + "Y");
+				loan.setSelf("/one-api/v1" + "/accounts/" + loan.getId());
 				account = loan;
 				break;
 		}
@@ -85,6 +115,14 @@ public class AccountRepository {
 			case 3: status = "Active"; break;
 		}
 		return status;
+	}
+	
+	public String generateRandomTransactionAccount() {
+		return txnAccountTypes.get(random.nextInt(txnAccountTypes.size()));
+	}
+	
+	public String generateRandomLoanAccount() {
+		return loanAccountTypes.get(random.nextInt(loanAccountTypes.size()));
 	}
 	
 	public static void main(String[] args) {

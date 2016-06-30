@@ -1,11 +1,13 @@
 package com.macquarie.bfs.oneapi.example.resource;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +28,19 @@ public class AccountResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-	@Path("/")
-	public Response getAccounts(@DefaultValue("0") @QueryParam("offset") int offset, @DefaultValue("10") @QueryParam("limit") int limit) {
-		return accountService.getAccounts(offset, limit);
+	public Response getAccounts(
+			@DefaultValue("0") @QueryParam("offset") int offset, 
+			@DefaultValue("10") @QueryParam("limit") int limit, 
+			@DefaultValue("*") @QueryParam("type") String type,
+			@Context HttpServletRequest request) {
+		return accountService.set(request).getAccounts(offset, limit, type);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+	@JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT, SerializationFeature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED})
 	@Path("/{id}")
-	public Response getAccount(@PathParam("id") String id) {
-		return accountService.getAccount(id);
+	public Response getAccount(@PathParam("id") String id, @Context HttpServletRequest request) {
+		return accountService.set(request).getAccount(id);
 	}
 }

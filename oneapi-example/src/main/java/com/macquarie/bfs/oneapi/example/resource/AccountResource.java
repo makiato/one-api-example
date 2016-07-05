@@ -3,6 +3,7 @@ package com.macquarie.bfs.oneapi.example.resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -32,6 +33,7 @@ public class AccountResource {
 			@DefaultValue("0") @QueryParam("offset") int offset, 
 			@DefaultValue("10") @QueryParam("limit") int limit, 
 			@DefaultValue("*") @QueryParam("type") String type,
+			@DefaultValue("NULL") @HeaderParam("X-Request-ID") String xRequestId,
 			@Context HttpServletRequest request) {
 		return accountService.set(request).getAccounts(offset, limit, type);
 	}

@@ -5,9 +5,9 @@ import java.util.List;
 public abstract class AbstractAccount extends AbstractEntity {
 	String accountStatus;
 	
-	public AbstractAccount(String id, String type, String accountStatus, String entityType, List<String> parentTypes) {
+	public AbstractAccount(String id, String resource, String accountStatus, String entityType, List<String> parentTypes) {
 		setId(id);
-		setType(type);
+		setResource(resource);
 		setAccountStatus(accountStatus);
 		setEntityType(entityType);
 		setParentEntityTypes(parentTypes);

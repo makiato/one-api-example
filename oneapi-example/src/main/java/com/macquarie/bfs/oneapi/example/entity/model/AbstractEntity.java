@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties({"basePath"})
 @JsonInclude(Include.NON_EMPTY)
 public abstract class AbstractEntity {
-	String type;
+	String resource;
 	String id;
 	String self;
 	String basePath;
@@ -48,12 +48,12 @@ public abstract class AbstractEntity {
 		this.self = self;
 	}
 
-	public String getType() {
-		return type;
+	public String getResource() {
+		return resource;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setResource(String resource) {
+		this.resource = resource;
 	}
 	
 	public String getId() {

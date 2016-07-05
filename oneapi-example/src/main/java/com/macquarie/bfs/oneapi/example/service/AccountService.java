@@ -30,6 +30,9 @@ public class AccountService {
 		Response response = new ResponseObject();
 		try {
 			response.setData(accountsRep.getAccount(id));
+			if(request.getHeader("X-Request-ID") != null) {
+				response.getMeta().setRequestId(request.getHeader("X-Request-ID"));
+			}
 		} catch(OneAPIException x) {
 			response.addErrorObject(x.getError());
 		}
@@ -40,7 +43,10 @@ public class AccountService {
 		Response response = new ResponseObject();
 		try {
 			response.setData(accountsRep.getAccountsPaginated(offset, limit, type));
-			response.getMeta().setDataSet(new DataSetObject(offset, limit, accountsRep.getSize(), request.getRequestURI()));
+			response.getMeta().setDataSet(new DataSetObject(offset, limit, accountsRep.getSize(), request.getRequestURL().toString()));
+			if(request.getHeader("X-Request-ID") != null) {
+				response.getMeta().setRequestId(request.getHeader("X-Request-ID"));
+			}
 		} catch(OneAPIException x) {
 			response.addErrorObject(x.getError());
 		}

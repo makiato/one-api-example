@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
+
 import com.macquarie.bfs.oneapi.example.OneAPIException;
 import com.macquarie.bfs.oneapi.example.entity.LoanAccount;
 import com.macquarie.bfs.oneapi.example.entity.TransactionAccount;
 import com.macquarie.bfs.oneapi.example.entity.common.ErrorObject;
 import com.macquarie.bfs.oneapi.example.entity.model.Entity;
+import com.macquarie.bfs.oneapi.example.service.ApplicationPropertiesService;
 
 public class AccountRepository {
 	SecureRandom random;
@@ -21,6 +24,8 @@ public class AccountRepository {
 	List<Entity> txnAccounts = new ArrayList<Entity>();
 	List<String> txnAccountTypes = Arrays.asList("Macquarie Platinum Transaction Account","Macquarie Transaction Account","Macquarie Savings Account","Clearing Account","Woolworths Premium Transaction Account");
 	List<String> loanAccountTypes = Arrays.asList("Basic Home Loan","Offset Home Loan","Line of Credit Home Loan","SMSF Property Loan","Reverse Mortgage");
+	
+	ApplicationPropertiesService properties = new ApplicationPropertiesService();
 	
 	int size = 0;
 	
@@ -87,19 +92,20 @@ public class AccountRepository {
 		return accounts;
 	}
 	
+	@PostConstruct
 	public Entity generateRandomAccount() {
 		Entity account = null;
 		int r = random.nextInt(2) + 1;
 		switch (r) {
 			case 1: 
 				TransactionAccount transaction = new TransactionAccount(UUID.randomUUID().toString(), generateRandomStatus(), generateRandomTransactionAccount());
-				transaction.setSelf("/one-api/v1" + "/accounts/" + transaction.getId());
+				transaction.setSelf(properties.getBaseURL() + "accounts/" + transaction.getId());
 				account = transaction;
 				break;
 			case 2:
 				LoanAccount loan = new LoanAccount(UUID.randomUUID().toString(), generateRandomStatus(), generateRandomLoanAccount());
 				loan.setLoanDuration("P" + (random.nextInt(20) + 10) + "Y");
-				loan.setSelf("/one-api/v1" + "/accounts/" + loan.getId());
+				loan.setSelf(properties.getBaseURL() + "accounts/" + loan.getId());
 				account = loan;
 				break;
 		}

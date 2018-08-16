@@ -1,15 +1,15 @@
-package com.macquarie.bfs.oneapi.example.service;
+package com.zettamachine.oneapi.example.service;
 
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import com.macquarie.bfs.oneapi.example.OneAPIException;
-import com.macquarie.bfs.oneapi.example.entity.common.DataSetObject;
-import com.macquarie.bfs.oneapi.example.entity.common.ResponseObject;
-import com.macquarie.bfs.oneapi.example.entity.model.Response;
-import com.macquarie.bfs.oneapi.example.repository.AccountRepository;
+import com.zettamachine.oneapi.example.OneAPIException;
+import com.zettamachine.oneapi.example.entity.common.DataSetObject;
+import com.zettamachine.oneapi.example.entity.common.ResponseObject;
+import com.zettamachine.oneapi.example.entity.model.Response;
+import com.zettamachine.oneapi.example.repository.AccountRepository;
 
 @Singleton
 @Service

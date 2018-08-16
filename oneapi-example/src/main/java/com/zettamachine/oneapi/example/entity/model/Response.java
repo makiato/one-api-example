@@ -1,11 +1,11 @@
-package com.macquarie.bfs.oneapi.example.entity.model;
+package com.zettamachine.oneapi.example.entity.model;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.macquarie.bfs.oneapi.example.entity.common.ErrorObject;
-import com.macquarie.bfs.oneapi.example.entity.common.MetaObject;
+import com.zettamachine.oneapi.example.entity.common.ErrorObject;
+import com.zettamachine.oneapi.example.entity.common.MetaObject;
 
 public interface Response {
 	void set(HttpServletRequest request);

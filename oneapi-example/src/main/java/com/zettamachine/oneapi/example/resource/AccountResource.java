@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example.resource;
+package com.zettamachine.oneapi.example.resource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
-import com.macquarie.bfs.oneapi.example.entity.model.Response;
-import com.macquarie.bfs.oneapi.example.service.AccountService;
+import com.zettamachine.oneapi.example.entity.model.Response;
+import com.zettamachine.oneapi.example.service.AccountService;
 
 @Path("/accounts")
 @Component

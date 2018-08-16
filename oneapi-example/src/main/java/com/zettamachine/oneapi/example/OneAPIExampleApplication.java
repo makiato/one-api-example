@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example;
+package com.zettamachine.oneapi.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

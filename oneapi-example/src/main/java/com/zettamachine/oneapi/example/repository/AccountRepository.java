@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example.repository;
+package com.zettamachine.oneapi.example.repository;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -10,12 +10,12 @@ import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
-import com.macquarie.bfs.oneapi.example.OneAPIException;
-import com.macquarie.bfs.oneapi.example.entity.LoanAccount;
-import com.macquarie.bfs.oneapi.example.entity.TransactionAccount;
-import com.macquarie.bfs.oneapi.example.entity.common.ErrorObject;
-import com.macquarie.bfs.oneapi.example.entity.model.Entity;
-import com.macquarie.bfs.oneapi.example.service.ApplicationPropertiesService;
+import com.zettamachine.oneapi.example.OneAPIException;
+import com.zettamachine.oneapi.example.entity.LoanAccount;
+import com.zettamachine.oneapi.example.entity.TransactionAccount;
+import com.zettamachine.oneapi.example.entity.common.ErrorObject;
+import com.zettamachine.oneapi.example.entity.model.Entity;
+import com.zettamachine.oneapi.example.service.ApplicationPropertiesService;
 
 public class AccountRepository {
 	SecureRandom random;

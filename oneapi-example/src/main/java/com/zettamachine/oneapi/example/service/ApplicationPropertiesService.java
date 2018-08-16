@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example.service;
+package com.zettamachine.oneapi.example.service;
 
 public class ApplicationPropertiesService {
 	

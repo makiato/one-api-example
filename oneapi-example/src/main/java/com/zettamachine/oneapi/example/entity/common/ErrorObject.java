@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example.entity.common;
+package com.zettamachine.oneapi.example.entity.common;
 
 public class ErrorObject {
 	String code;

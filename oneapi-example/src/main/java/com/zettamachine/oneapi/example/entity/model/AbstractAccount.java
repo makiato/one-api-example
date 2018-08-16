@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example.entity.model;
+package com.zettamachine.oneapi.example.entity.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

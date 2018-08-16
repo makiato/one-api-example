@@ -1,6 +1,6 @@
-package com.macquarie.bfs.oneapi.example;
+package com.zettamachine.oneapi.example;
 
-import com.macquarie.bfs.oneapi.example.entity.common.ErrorObject;
+import com.zettamachine.oneapi.example.entity.common.ErrorObject;
 
 public class OneAPIException extends Exception {
 

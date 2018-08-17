@@ -1,4 +1,4 @@
-package com.macquarie.bfs.oneapi.example.test;
+package com.zettamachine.oneapi.example.test;
 
 import java.util.UUID;
 
